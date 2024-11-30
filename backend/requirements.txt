@@ -1,0 +1,5 @@
+# backend/requirements.txt
+websockets
+asyncpg
+fastapi
+uvicorn

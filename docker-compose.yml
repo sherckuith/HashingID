@@ -1,0 +1,49 @@
+#version: "3.9"
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: mrjoy_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mrjoy
+    restart: unless-stopped #always
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - mrjoy_network
+
+  backend:
+    image: mrjoy-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mrjoy_backend
+    environment:
+      DB_HOST: mrjoy_db
+      DB_USER: postgres
+      DB_PASS: password
+      DB_NAME: mrjoy
+      DB_PORT: 5432
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    command: ["./wait-for-it", "mrjoy_db:5432", "--", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "5000"]
+    networks:
+      - mrjoy_network
+    volumes:
+      - .:/app
+
+networks:
+  mrjoy_network:
+    driver: bridge
+
+volumes:
+  db_data:
+

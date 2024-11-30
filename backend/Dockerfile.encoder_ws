@@ -1,0 +1,15 @@
+# backend/Dockerfile.encoder_ws
+"""
+Dockerfile para backend encoder_ws.py
+Construye la imagen y ejecuta el servicio WebSocket.
+"""
+FROM python:3.10-slim
+
+WORKDIR /app
+
+COPY backend/requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY backend/encoder_ws.py /app/encoder_ws.py
+
+CMD ["python", "encoder_ws.py"]
