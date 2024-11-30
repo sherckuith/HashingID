@@ -540,31 +540,31 @@ psql -h mrjoy_db -U postgres -d mrjoy
    Habilitar y arrancar el servicio de systemd:
       Una vez creado el archivo de servicio, recarga systemd y habilita el servicio para que se inicie automáticamente:
          Para docker-compose-app.service:
-         ```
-         sudo systemctl daemon-reload
-         sudo systemctl enable docker-compose-app
-         sudo systemctl start docker-compose-app
-         ```
+            ```
+            sudo systemctl daemon-reload
+            sudo systemctl enable docker-compose-app
+            sudo systemctl start docker-compose-app
+            ```
          Para backend.service:
-         ```
-         sudo systemctl restart backend.service
-         sudo systemctl enable backend.service
-         sudo systemctl start backend.service
-         ```
-      Esto garantiza que los contenedores de Docker se inicien automáticamente cuando el sistema operativo se reinicie.
-
+            ```
+            sudo systemctl restart backend.service
+            sudo systemctl enable backend.service
+            sudo systemctl start backend.service
+            ```
+              Esto garantiza que los contenedores de Docker se inicien automáticamente cuando el sistema operativo se reinicie.
+              
    Para proporcionar más información sobre por qué backend.service
-      ```
-      journalctl -xe
-      ```
-
+            ```
+            journalctl -xe
+            ```
 
 ## Configurar Docker Compose para que los contenedores se inicien automáticamente.
-  ```
-    services:
-      backend:
-          restart: unless-stopped
-  ```
+   ```
+      services:
+         backend:
+            restart: unless-stopped
+   ```
+   
    El valor restart: unless-stopped asegura que los contenedores se reinicien automáticamente, excepto si se detienen manualmente. Las opciones posibles para restart son:
       1. no: No reiniciar el contenedor (por defecto).
       2. always: Reiniciar el contenedor cuando Docker se reinicia.
