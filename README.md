@@ -165,6 +165,31 @@ Importa la colección de Postman: Si deseas importar una colección de Postman, 
 
    El archivo req_data.py permite solicitar datos al usuario y enviarlos a través de WebSockets para interacción en tiempo real. Asegúrate de que VOLTA_HOST esté correctamente configurado en la red, y que el puerto 5000 esté abierto para la comunicación.
 
+# Estructura del directorio
+
+      HashingID
+          ├── backend
+          │   ├── api
+          │   │   ├── __init__.py
+          │   │   ├── main.py
+          │   │   ├── routes.py
+          │   │   └── tests.py
+          │   ├── Dockerfile
+          │   ├── Dockerfile.encoder_ws
+          │   ├── encoder_ws.py
+          │   ├── README.md
+          │   ├── requirements.txt
+          │   ├── tests
+          │   │   ├── __init__.py
+          │   │   └── test_routes.py
+          │   ├── tests.py
+          │   └── wait-for-it.sh
+          ├── docker-compose.yml
+          ├── encoder.py
+          ├── init.sql
+          └── req_data.py
+    
+
 # Comandos utiles
 
 ## Descargar el script wait-for-it
