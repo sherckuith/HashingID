@@ -10,22 +10,23 @@ HashingID es una aplicación que gestiona clientes a través de una API REST. Lo
 ## Instalación
 
 1. Clona el repositorio en tu máquina local:
-   ```bash
+   ```
    git clone https://github.com/sherckuith/HashingID.git
+   ```
 
 Navega al directorio del proyecto:
 
-   ```bash
-        cd HashingID
-```
+   ```
+   cd HashingID
+   ```
 Levanta los contenedores de Docker:
-```bash
+   ```
   docker-compose up --build
-```
+   ```
 Accede a la API en tu navegador o Postman usando la URL:
-```http
-  http://localhost:5000
-```
+   ```
+     http://localhost:5000
+   ```
 
 ##Uso con Postman
 
@@ -91,13 +92,16 @@ A continuación se explica cómo usar Postman para interactuar con la API de MrJ
 #### 3. DELETE /clientes/{id}
   Descripción: Elimina un cliente por su id.
   Método: DELETE
-  ```URL: http://localhost:5000/clientes/{id}```
+  ```
+  URL: http://localhost:5000/clientes/{id}
+   ```
   Reemplaza {id} con el id del cliente que deseas eliminar.
   Respuesta Esperada:
     ```json
       {
         "message": "Cliente eliminado con éxito."
-      }```
+      }
+      ```
 
 ## Usando Postman
    Para interactuar con la API utilizando Postman:
@@ -107,13 +111,13 @@ Importa la colección de Postman: Si deseas importar una colección de Postman, 
   Realizar una solicitud GET:
     Abre Postman.
     Selecciona el método GET.
-    En la barra de URL, ingresa ```http://localhost:5000/clientes```
+    En la barra de URL, ingresa ``` http://localhost:5000/clientes ```
     Haz clic en "Send".
     La respuesta debería mostrarte todos los clientes registrados en la base de datos.
 
   Crear un nuevo cliente:
     En Postman, selecciona el método POST.
-    Ingresa la URL ```http://localhost:5000/clientes```
+    Ingresa la URL ``` http://localhost:5000/clientes ```
     En la pestaña "Body", selecciona raw y luego elige el tipo JSON.
     Pega el siguiente JSON:
       ```json
@@ -147,22 +151,19 @@ Importa la colección de Postman: Si deseas importar una colección de Postman, 
 
 ## Lógica del Sistema
 
-    Entrada: Los datos de los clientes pueden ser recibidos a través de una petición POST /clientes o mediante la ejecución del script req_data.py, que también solicita los datos del cliente y los envía al backend.
-
-    Proceso: El servidor genera un hash_id único para cada cliente utilizando el archivo encoder_ws.py. Este hash es utilizado para validar y almacenar de manera segura la información del cliente.
-
-    Salida: El servidor responde con el estado de la operación (éxito o fallo) y los datos guardados, como el id del cliente generado y el hash_id asignado.
+   Entrada: Los datos de los clientes pueden ser recibidos a través de una petición POST /clientes o mediante la ejecución del script req_data.py, que también solicita los datos del cliente y los envía al backend.
+   Proceso: El servidor genera un hash_id único para cada cliente utilizando el archivo encoder_ws.py. Este hash es utilizado para validar y almacenar de manera segura la información del cliente.
+   Salida: El servidor responde con el estado de la operación (éxito o fallo) y los datos guardados, como el id del cliente generado y el hash_id asignado.
 
 ## Postman Collection
-    Si prefieres importar la colección de Postman para tener una configuración más rápida, sigue estos pasos:
-
+   Si prefieres importar la colección de Postman para tener una configuración más rápida, sigue estos pasos:
       Haz clic en "Import" en Postman.
       Selecciona el archivo .json de la colección proporcionado.
       Todos los endpoints de la API estarán listos para ser usados.
 
 ## Explicación del Sistema
 
-    El archivo req_data.py permite solicitar datos al usuario y enviarlos a través de WebSockets para interacción en tiempo real. Asegúrate de que VOLTA_HOST esté correctamente configurado en la red, y que el puerto 5000 esté abierto para la comunicación.
+   El archivo req_data.py permite solicitar datos al usuario y enviarlos a través de WebSockets para interacción en tiempo real. Asegúrate de que VOLTA_HOST esté correctamente configurado en la red, y que el puerto 5000 esté abierto para la comunicación.
 
 # Comandos utiles
 
@@ -207,23 +208,33 @@ git clone https://github.com/vishnubob/wait-for-it.git
 
 ### 2. Iniciar PostgreSQL localmente:
    Linux
-   ```sudo systemctl start postgresql```
+   ```
+   sudo systemctl start postgresql
+   ```
    Windows:
    El servicio debería iniciar automáticamente al completar la instalación.
    
 ### 3. Acceso al cliente psql:
-```psql -U postgres```
+```
+psql -U postgres
+```
 
 ## Tips basicos para resolver problemas comunes:
 
 ### Detener el proceso que está usando el puerto:
    1. Si el puerto está siendo usado por una instancia local de PostgreSQL, puedes detener ese proceso:
-      ```sudo service postgresql stop```
-   2. O, si el proceso está corriendo de manera manual, puedes matarlo directamente:
-      ```sudo kill <pid>```
+      ```
+      sudo service postgresql stop
+      ```
+   3. O, si el proceso está corriendo de manera manual, puedes matarlo directamente:
+      ```
+      sudo kill <pid>
+      ```
       Donde <pid> es el ID del proceso que está usando el puerto.
-   3. Verificar qué proceso está utilizando el puerto 5432:
-      ```sudo lsof -i :5432```
+   5. Verificar qué proceso está utilizando el puerto 5432:
+      ```
+      sudo lsof -i :5432
+      ```
 
 
 ## Para uso de dockers:
@@ -242,14 +253,22 @@ Actualizar Docker y docker-compose (opcional):
 Instalar la versión más actualizada de Docker Compose
    Siga estos pasos para descargar e instalar la última versión.
    1. Descargue el binario más reciente:
-      ```sudo curl -SL "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose```
-   2. Dé permisos de ejecución:
-      ```sudo chmod +x /usr/local/bin/docker-compose```
-   3. Verifique la instalación:
-      ```docker-compose --version```
-   4. Confirme la ubicación actual de Docker Compose:
+      ```
+      sudo curl -SL "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+      ```
+   3. Dé permisos de ejecución:
+      ```
+      sudo chmod +x /usr/local/bin/docker-compose
+      ```
+   5. Verifique la instalación:
+      ```
+      docker-compose --version
+      ```
+   7. Confirme la ubicación actual de Docker Compose:
          Como binario independiente (usualmente en /usr/local/bin/docker-compose).
-         ```which docker-compose```
+         ```
+      which docker-compose
+         ```
 
 Verifique la versión instalada:
 ```
@@ -258,19 +277,29 @@ docker-compose --version
 ```
 
 Para mostrar los contenedores en ejecución:
-```docker ps -a```
+```
+docker ps -a
+```
 
 Para eliminar contenedores que estan corriendo::
-```docker rm -f <CONTAINER_ID>```
+```
+docker rm -f <CONTAINER_ID>
+```
 
 Forzar la detención de un Docker:
-```docker kill <CONTAINER_ID>```
+```
+docker kill <CONTAINER_ID>
+```
 
 Detener el contenedor manualmente
-```docker stop <CONTAINER_ID>```
+```
+docker stop <CONTAINER_ID>
+```
 
 Reinicio de Docker para liberar los puertos ocupados:
-```sudo systemctl restart docker```
+```
+sudo systemctl restart docker
+```
 
 Eliminar contenedores y volúmenes existentes:
 ```
@@ -286,10 +315,14 @@ docker-compose up --build -d
 
 Verificar servicios activos:
    Después de levantar los servicios, verificar que estén corriendo con:
-   ```docker-compose ps```
+   ```
+   docker-compose ps
+```
 
 Limpiar los contenedores actuales:
-```docker-compose down```
+```
+docker-compose down
+```
 
 Iniciar un servicio específico para depuración:
 ```
@@ -297,7 +330,9 @@ docker-compose up mrjoy_db
 docker-compose up mrjoy_backend
 ```
 Elimina la cache de los contenedores:
-```docker-compose build --no-cache```
+```
+docker-compose build --no-cache
+```
 
 Testea la aplicacion usando pytest:
 ```
@@ -307,65 +342,105 @@ pytest tests/test_routes.py
 ```
 
 Ejecutar la aplicación FastAPI usando uvicorn de la siguiente manera:
-```uvicorn backend.api.main:app --reload```
+```
+uvicorn backend.api.main:app --reload
+```
 
 Crea volumenes:
-```docker volume create db_data```
+```
+docker volume create db_data
+```
 
 Verifica los volumenes 
 ``` ```
 
 Da de baja los volumenes existentes:
-```docker-compose down --volumes```
+```
+docker-compose down --volumes
+```
 
 Verificar el contenido del Docker Build Context
-```docker build -t test-backend```
+```
+docker build -t test-backend
+```
 
 Reconstruye los servicios y levanta los servicios:
-```docker-compose up --build```
+```
+docker-compose up --build
+```
 
 Reconstruye las imágenes:
-```docker-compose build```
+```
+docker-compose build
+```
 
 Limpia el caché de Docker
-```docker builder prune -a```
+```
+docker builder prune -a
+```
 
 Para obtener más detalles sobre la configuración y el estado de los contenedores:
-```docker inspect mrjoy_backend```
+```
+docker inspect mrjoy_backend
+```
 
 Revisa los registros de los contenedores para identificar problemas específicos:
-```docker logs mrjoy_db```
-```docker logs mrjoy_backend```
+```
+docker logs mrjoy_db
+```
+```
+docker logs mrjoy_backend
+```
 
 Limpia los volúmenes si los datos podrían estar corruptos:
-```docker volume rm db_data```
+```
+docker volume rm db_data
+```
 
 Detén y elimina los contenedores:
-```docker-compose down```
+```
+docker-compose down
+```
 
 Iniciar PostgreSQL solo:
-```docker-compose up mrjoy_db```
+```
+docker-compose up mrjoy_db
+```
 
 Verifica que el contenedor está en ejecución y prueba la conectividad:
-```docker exec -it mrjoy_db psql -U admin -d mrjoy```
+```
+docker exec -it mrjoy_db psql -U admin -d mrjoy
+```
 
 Iniciar el backend:
-```docker-compose up mrjoy_backend```
+```
+docker-compose up mrjoy_backend
+```
 
 Verifica si el puerto 5432 está ocupado:
-```netstat -tuln | grep 5432```
+```
+netstat -tuln | grep 5432
+```
 
 Revisa los registros del contenedor de PostgreSQL:
-```docker logs mrjoy_db```
+```
+docker logs mrjoy_db
+```
 
 Inspeccionar qué está fallando en el backend:
-```docker logs mrjoy_backend```
+```
+docker logs mrjoy_backend
+```
 
 Para verificar que el backend se conecta a la base de datos, accede al contenedor mrjoy_backend:
-```docker exec -it mrjoy_backend bash```
+```
+docker exec -it mrjoy_backend bash
+```
 
 Prueba la conectividad con un ping
-```ping mrjoy_db```
+```
+ping mrjoy_db
+```
 
 Verifica la conexión a PostgreSQL:
 ```
@@ -377,21 +452,31 @@ psql -h mrjoy_db -U postgres -d mrjoy
 ## Recomendaciones adicionales:
 1. Permisos:
    Asegúrate de que el usuario VOLTA tenga permisos para ejecutar Docker sin necesidad de privilegios de root. Para ello, debes agregar a VOLTA al grupo docker si no lo has hecho ya:
-   ```sudo usermod -aG docker USER```
+   ```
+   sudo usermod -aG docker USER
+   ```
    Después de ejecutar este comando, es recomendable cerrar sesión y volver a iniciarla para que los cambios tomen efecto.
-2. Verificar el path de docker-compose:
+3. Verificar el path de docker-compose:
    Verifica que el path a docker-compose (/usr/local/bin/docker-compose) sea el correcto. Puedes hacerlo ejecutando:
-   ```which docker-compose```
+   ```
+   which docker-compose
+   ```
    Si el comando no devuelve /usr/local/bin/docker-compose, ajusta la ruta en el archivo .service según corresponda.
-3. Habilitar el servicio:
+5. Habilitar el servicio:
    Para que el servicio se inicie automáticamente al arrancar el sistema, habilita el servicio con:
-   ```sudo systemctl enable docker-compose-app.service```
-4. Verificación del estado del servicio:
+   ```
+   sudo systemctl enable docker-compose-app.service
+   ```
+7. Verificación del estado del servicio:
    Después de hacer estos cambios y habilitar el servicio, puedes verificar su estado con:
-   ```sudo systemctl status docker-compose-app.service```
-5. Revisar logs si hay problemas:
+   ```
+   sudo systemctl status docker-compose-app.service
+   ```
+9. Revisar logs si hay problemas:
    Si el servicio no se inicia correctamente, puedes revisar los logs del servicio con:
-   ```sudo journalctl -u docker-compose-app.service```
+   ```
+   sudo journalctl -u docker-compose-app.service
+   ```
 
 
 ## Para que el dopcker se ejecute al iniciar el sistema:
@@ -469,7 +554,9 @@ psql -h mrjoy_db -U postgres -d mrjoy
       Esto garantiza que los contenedores de Docker se inicien automáticamente cuando el sistema operativo se reinicie.
 
    Para proporcionar más información sobre por qué backend.service
-      ```journalctl -xe```
+      ```
+      journalctl -xe
+      ```
 
 
 ## Configurar Docker Compose para que los contenedores se inicien automáticamente.
