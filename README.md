@@ -241,34 +241,34 @@ psql -U postgres
 
 Actualizar Docker y docker-compose (opcional): 
    Actualice los repositorios:
-      ```
+   ```
       sudo apt-get update
       sudo apt-get install docker-ce docker-ce-cli containerd.io docker.io -y
       sudo apt install docker-compose -y
       docker-compose version  # Nota: Con guion en el comando
       sudo systemctl enable docker
       sudo systemctl start docker
-      ```
+   ```
 
 Instalar la versión más actualizada de Docker Compose
    Siga estos pasos para descargar e instalar la última versión.
    1. Descargue el binario más reciente:
-      ```
-      sudo curl -SL "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-      ```
-   3. Dé permisos de ejecución:
-      ```
-      sudo chmod +x /usr/local/bin/docker-compose
-      ```
-   5. Verifique la instalación:
-      ```
-      docker-compose --version
-      ```
-   7. Confirme la ubicación actual de Docker Compose:
+         ```
+         sudo curl -SL "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+         ```
+   2. Dé permisos de ejecución:
+         ```
+         sudo chmod +x /usr/local/bin/docker-compose
+         ```
+   3. Verifique la instalación:
+         ```
+         docker-compose --version
+         ```
+   4. Confirme la ubicación actual de Docker Compose:
          Como binario independiente (usualmente en /usr/local/bin/docker-compose).
-         ```
-      which docker-compose
-         ```
+            ```
+            which docker-compose
+            ```
 
 Verifique la versión instalada:
 ```
@@ -529,14 +529,14 @@ psql -h mrjoy_db -U postgres -d mrjoy
 
    ```
    Explicacion de las dependencias de servicio:
-      1. After=docker.service: Esto asegura que tu servicio docker-compose-app.service se inicie después de que Docker esté disponible.
-      2. Requires=docker.service: Esto garantiza que el servicio Docker esté en funcionamiento antes de intentar iniciar el servicio Docker Compose. Si Docker no está disponible, este servicio no se iniciará.
-      3. WorkingDirectory: El directorio de trabajo está configurado correctamente como /home/USUARIO/HashingID, que es donde está el proyecto. Asegúrece de que este directorio contenga tu archivo docker-compose.yml.
-      4. ExecStart: El comando para iniciar el servicio es correcto: /usr/local/bin/docker-compose up -d. Esto ejecuta Docker Compose en segundo plano, como es necesario para mantener la aplicación en funcionamiento después de un reinicio del sistema.
-      5. ExecStop: El comando de detención también está correcto: /usr/local/bin/docker-compose down, que apagará y eliminará los contenedores al detener el servicio.
-      6. Restart=always: Esta configuración asegura que el servicio Docker Compose se reinicie automáticamente si falla o se detiene. Esto es ideal si desea que sus aplicaciones Docker estén siempre disponibles.
-      7. User=USUARIO: El servicio se ejecutará como el usuario USUARIO, lo cual es correcto si tienes permisos adecuados para acceder a Docker y a los directorios necesarios.
-
+   1. After=docker.service: Esto asegura que tu servicio docker-compose-app.service se inicie después de que Docker esté disponible.
+   2. Requires=docker.service: Esto garantiza que el servicio Docker esté en funcionamiento antes de intentar iniciar el servicio Docker Compose. Si Docker no está disponible, este servicio no se iniciará.
+   3. WorkingDirectory: El directorio de trabajo está configurado correctamente como /home/USUARIO/HashingID, que es donde está el proyecto. Asegúrece de que este directorio contenga tu archivo docker-compose.yml.
+   4. ExecStart: El comando para iniciar el servicio es correcto: /usr/local/bin/docker-compose up -d. Esto ejecuta Docker Compose en segundo plano, como es necesario para mantener la aplicación en funcionamiento después de un reinicio del sistema.
+   5. ExecStop: El comando de detención también está correcto: /usr/local/bin/docker-compose down, que apagará y eliminará los contenedores al detener el servicio.
+   6. Restart=always: Esta configuración asegura que el servicio Docker Compose se reinicie automáticamente si falla o se detiene. Esto es ideal si desea que sus aplicaciones Docker estén siempre disponibles.
+   7. User=USUARIO: El servicio se ejecutará como el usuario USUARIO, lo cual es correcto si tienes permisos adecuados para acceder a Docker y a los directorios necesarios.
+      
    Habilitar y arrancar el servicio de systemd:
       Una vez creado el archivo de servicio, recarga systemd y habilita el servicio para que se inicie automáticamente:
          Para docker-compose-app.service:
