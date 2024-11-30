@@ -570,3 +570,39 @@ psql -h mrjoy_db -U postgres -d mrjoy
       1. no: No reiniciar el contenedor (por defecto).
       2. always: Reiniciar el contenedor cuando Docker se reinicia.
       3. unless-stopped: Reiniciar el contenedor a menos que se haya detenido manualmente.
+
+
+# Pruebas:
+Ejecuta las pruebas dentro del contenedor: 
+   Accede al contenedor backend:
+   ```
+      docker exec -it mrjoy_backend bash
+   ```
+   
+   1. Ejecuta el script directamente:
+      ```
+      python /app/req_data.py
+      ```
+   2. Usando Pytest: Ejecuta pytest desde la raíz del proyecto o una carpeta específica:
+      ```
+      pytest
+      #Si deseas más detalles en los resultados:
+         pytest -v
+      ```
+   3. Verifica dentro del contenedor que el PYTHONPATH esté configurado correctamente:
+      ```
+      docker exec -it mrjoy_backend bash
+      echo $PYTHONPATH
+      ```
+      El resultado debería incluir /app, /app/api, y /backend.
+   4. Prueba la importación:
+      ```
+      python -c "import api.main"
+      ```
+
+   
+
+      
+
+
+
